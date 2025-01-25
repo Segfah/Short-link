@@ -1,0 +1,47 @@
+services:
+  fullstack:
+    build:
+      context: ./project
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./project:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=test-user
+      - DB_PASSWORD=Test123@
+      - DB_NAME=short_links
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_dev
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: short_links
+      MYSQL_USER: test-user         # Usuario test
+      MYSQL_PASSWORD: Test123@      # Contraseña para el usuario test
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      # - - Lineas a quitar - - - -
+      PMA_USER: test-user      
+      PMA_PASSWORD: Test123@
+      # - - - - - - - - - - - - - -
+    ports:
+      - "8081:80"
+
+volumes:
+  db_data:
