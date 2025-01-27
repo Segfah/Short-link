@@ -1,19 +1,19 @@
 services:
-  fullstack:
-    build:
-      context: ./project
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./project:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_USER=test-user
-      - DB_PASSWORD=Test123@
-      - DB_NAME=short_links
+  # fullstack:
+  #   build:
+  #     context: ./project
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./project:/app
+  #     - /app/node_modules
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DB_HOST=db
+  #     - DB_PORT=3306
+  #     - DB_USER=test-user
+  #     - DB_PASSWORD=Test123@
+  #     - DB_NAME=short_links
 
   db:
     image: mysql:8.0
