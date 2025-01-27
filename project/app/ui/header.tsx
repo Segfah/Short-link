@@ -32,7 +32,7 @@ const Header = () => {
               {/* Menu en pantallas grandes */}
               <div className="hidden sm:flex sm:items-center">
                 <Link
-                  href="#"
+                  href="/url-info"
                   className="text-gray-800 text-sm font-semibold hover:text-sky-700 mr-4"
                 >
                   Statistiques
