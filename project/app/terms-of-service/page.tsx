@@ -27,7 +27,7 @@ export default function Page() {
           <h2 className="text-xl font-semibold mb-2">4. Utilisation du Service</h2>
           <ul className="list-disc list-inside">
             <li>Les liens créés sans compte utilisateur seront automatiquement supprimés après 24 heures.</li>
-            <li>Les liens créés avec un compte utilisateur seront supprimés 2 an après leur dernière utilisation, si cette option est activée.</li>
+            <li>Les liens créés avec un compte utilisateur seront supprimés, modifiés par vous-même ou si vous supprimez votre compte.</li>
             <li>Vous vous engagez à ne pas utiliser le service à des fins illégales, frauduleuses ou malveillantes.</li>
           </ul>
         </div>
