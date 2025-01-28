@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { NavLinks, NavLinksMobile } from "./nav-links";
+
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,26 +32,8 @@ const Header = () => {
               </div>
 
               {/* Menu en pantallas grandes */}
-              <div className="hidden sm:flex sm:items-center">
-                <Link
-                  href="/url-info"
-                  className="text-gray-800 text-sm font-semibold hover:text-sky-700 mr-4"
-                >
-                  Statistiques
-                </Link>
-                <Link
-                  href="#"
-                  className="text-gray-800 text-sm font-semibold hover:text-sky-700 mr-4"
-                >
-                  Mes Liens
-                </Link>
-                <Link
-                  href="#"
-                  className="text-gray-800 text-sm font-semibold hover:text-sky-700 mr-4"
-                >
-                  Tableau de Bord Liens
-                </Link>
-              </div>
+              <NavLinks />
+
 
               {/* Botones de Sign In y Sign Up */}
               <div className="hidden sm:flex sm:items-center">
@@ -86,24 +70,7 @@ const Header = () => {
             {isMobileMenuOpen && (
               <div className="block sm:hidden bg-white border-t-2 py-2">
                 <div className="flex flex-col">
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-sm font-semibold hover:text-sky-700 mb-1"
-                  >
-                    Statistiques
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-sm font-semibold hover:text-sky-700 mb-1"
-                  >
-                    Mes Liens
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-gray-800 text-sm font-semibold hover:text-sky-700 mb-1"
-                  >
-                    Tableau de Bord Liens
-                  </Link>
+                  <NavLinksMobile />
                   <div className="flex justify-between items-center border-t-2 pt-2">
                     <Link
                       href="#"
