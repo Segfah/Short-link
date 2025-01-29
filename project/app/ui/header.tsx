@@ -5,9 +5,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { NavLinks, NavLinksMobile } from "./nav-links";
 
+const AuthForm: React.FC = () => (
+  <div>
+    <p className="text-gray-800 font-semibold mb-2">Se connecter</p>
+    <button className="w-full bg-sky-700 text-white p-2 rounded">Continuer avec Google</button>
+  </div>
+);
+
+const AuthDropdown: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  return (
+    <div className="absolute right-0 mt-2 w-64 bg-white border shadow-lg rounded-lg p-4 z-50">
+      <button onClick={onClose} className="absolute top-2 right-2 text-gray-500">✕</button>
+      <AuthForm />
+    </div>
+  );
+};
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -36,19 +52,13 @@ const Header = () => {
 
 
               {/* Botones de Sign In y Sign Up */}
-              <div className="hidden sm:flex sm:items-center">
-                <Link
-                  href="#"
-                  className="text-gray-800 text-sm font-semibold hover:text-sky-700 mr-4"
-                >
-                  Se connecter
-                </Link>
-                <Link
-                  href="#"
-                  className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-sky-700 hover:border-sky-700"
-                >
-                  S'inscrire
-                </Link>
+              <div className="hidden sm:flex ">
+                <div className="relative ">
+                  <button onClick={() => setDropdownOpen(!isDropdownOpen)} className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-sky-700 hover:border-sky-700">
+                    Se connecter / S'inscrire
+                  </button>
+                  {isDropdownOpen && <AuthDropdown onClose={() => setDropdownOpen(false)} />}
+                </div>
               </div>
 
               {/* Botón de menú móvil */}
@@ -72,18 +82,12 @@ const Header = () => {
                 <div className="flex flex-col">
                   <NavLinksMobile />
                   <div className="flex justify-between items-center border-t-2 pt-2">
-                    <Link
-                      href="#"
-                      className="text-gray-800 text-sm font-semibold hover:text-sky-700 mr-4"
-                    >
-                      Se connecter
-                    </Link>
-                    <Link
-                      href="#"
-                      className="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-sky-700 hover:border-sky-700"
-                    >
-                      S'inscrire
-                    </Link>
+                    <div className=" ">
+                      <button onClick={() => setDropdownOpen(!isDropdownOpen)} className="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-sky-700 hover:border-sky-700">
+                        Se connecter / S'inscrire
+                      </button>
+                      {isDropdownOpen && <AuthDropdown onClose={() => setDropdownOpen(false)} />}
+                    </div>
                   </div>
                 </div>
               </div>
