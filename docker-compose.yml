@@ -1,47 +1,28 @@
 services:
-  # fullstack:
-  #   build:
-  #     context: ./project
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./project:/app
-  #     - /app/node_modules
-  #   environment:
-  #     - NODE_ENV=development
-  #     - DB_HOST=db
-  #     - DB_PORT=3306
-  #     - DB_USER=test-user
-  #     - DB_PASSWORD=Test123@
-  #     - DB_NAME=short_links
-
   db:
-    image: mysql:8.0
-    container_name: mysql_dev
+    image: postgres:16.6
+    container_name: postgres_dev
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: short_links
-      MYSQL_USER: test-user         # Usuario test
-      MYSQL_PASSWORD: Test123@      # Contraseña para el usuario test
+      POSTGRES_DB: short_links
+      POSTGRES_USER: test-user        # Usuario test
+      POSTGRES_PASSWORD: Test123@     # Contraseña para el usuario test
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
     restart: always
     environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      # - - Lineas a quitar - - - -
-      PMA_USER: test-user      
-      PMA_PASSWORD: Test123@
-      # - - - - - - - - - - - - - -
+      PGADMIN_DEFAULT_EMAIL: admin@example.com # Usuario test
+      PGADMIN_DEFAULT_PASSWORD: admin123       # Contraseña para el usuario test
     ports:
       - "8081:80"
+    depends_on:
+      - db
 
 volumes:
   db_data:
