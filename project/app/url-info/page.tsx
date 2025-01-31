@@ -1,6 +1,21 @@
-"use client";
+"use client"
+import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const [code, setCode] = useState("");
+  const router = useRouter();
+
+
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Verifica que el código no esté vacío
+    if (code.trim() !== "") {
+      router.push(`/url-info/${code.trim()}`);
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen py-8 px-4">
       <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 text-gray-800">
@@ -27,12 +42,13 @@ export default function Page() {
           </ul>
         </div>
 
-
         {/* Formulario de búsqueda */}
-        <form className="mb-6">
+        <form onSubmit={handleSubmit} className="mb-6">
           <input
             type="text"
             placeholder="Entrez le code ici..."
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
             className="text-center w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
           />
           <button
@@ -43,33 +59,6 @@ export default function Page() {
           </button>
         </form>
 
-        {/* Espacio para mostrar resultados */}
-        <div className="mt-4">
-
-
-          {/* Relleno con un JSON de ejemplo */}
-          <div className="mt-4 text-center text-gray-500">
-            Informations détaillées pour le code <span className="font-semibold">XXXX</span> :
-          </div>
-          <div className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-md font-mono text-sm text-gray-700">
-            <pre>
-{`{
-  "id": "1",
-  "url": "https://www.example.com/some/long/url",
-  "shortCode": "abc123",
-  "createdAt": "2024-09-01T12:00:00Z",
-  "accessCount": 123
-}`}
-            </pre>
-          </div>
-
-          {/* no hay resultados */}
-          <div className="mt-4 text-center text-gray-500">
-            Aucun résultat trouvé pour le code spécifié, veuillez réessayer avec un autre code.
-          </div>
-
-
-        </div>
       </div>
     </div>
   );
