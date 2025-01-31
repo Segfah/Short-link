@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { code: string } }) {
       <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 text-gray-800">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Informations détaillées et publiques du lien{' '}
-          <span className="font-semibold">{linkInfo ? linkInfo.short_code : 'XXXX'}</span>
+          <span className="font-semibold">{code}</span>
         </h1>
 
         <div className="mt-4">
