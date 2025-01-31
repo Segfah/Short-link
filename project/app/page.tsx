@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="bg-gray-100 min-h-screen py-8 px-4">
@@ -34,6 +36,22 @@ export default function Home() {
           <div className="mt-4 text-center text-gray-500 mb-8">
             Vous vous engagez à ne pas utiliser le service à des fins illégales, frauduleuses ou malveillantes. 
           </div>
+
+        </div>
+
+        <div className="mt-4">
+          {/* Relleno con un JSON de ejemplo */}
+          <div className="mt-4 text-center text-gray-500 mb-8">
+          
+          </div>
+          <Link
+              key='Statistiques'
+              href='url-info'
+              className="text-sky-700text-sm font-semibold hover:text-sky-700 mr-4 text-center"
+            >
+              <p>Si vous avez reçu un lien raccourci, vous pouvez cliquer ici afin de voir l'URL complète d'origine ainsi que des informations supplémentaires.</p>
+            </Link>
+            
 
         </div>
       </div>
