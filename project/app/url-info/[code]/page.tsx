@@ -2,7 +2,7 @@ import { getLinkInfo } from '@/app/ui/info-rendering';
 import Link from 'next/link';
 
 export default async function Page({ params }: { params: { code: string } }) {
-  const { code } = params;
+  const { code } = await params;
   const linkInfo = await getLinkInfo(code);
 
   const fields = [
