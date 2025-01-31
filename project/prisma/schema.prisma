@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model links {
+  id                   Int       @id @default(autoincrement())
+  short_code           String    @unique
+  original_url         String
+  user_id              Int?
+  access_count         Int?      @default(0)
+  last_access          DateTime? @db.Timestamp(6)
+  delete_after_2_years Boolean?  @default(true)
+  is_disabled          Boolean?  @default(false)
+  ip_creation          String?
+  deactivate_in        DateTime? @db.Timestamp(6)
+  creation_date        DateTime? @default(now()) @db.Timestamp(6)
+  updated_date         DateTime? @default(now()) @db.Timestamp(6)
+  users                users?    @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+}
+
+model users {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  is_admin      Boolean?  @default(false)
+  is_banned     Boolean?  @default(false)
+  banned_reason String?
+  creation_date DateTime? @default(now()) @db.Timestamp(6)
+  links         links[]
+}
