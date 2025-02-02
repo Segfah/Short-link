@@ -1,4 +1,5 @@
 import Link from "next/link";
+import UrlShortenerForm from "./ui/url-shortener-form";
 
 export default function Home() {
   return (
@@ -14,19 +15,7 @@ export default function Home() {
         </div>
 
         {/* Formulaire para acortar URL */}
-        <form className="mb-6">
-          <input
-            type="text"
-            placeholder="Entrez l'Url a raccourcir"
-            className="text-center w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          <button
-            type="submit"
-            className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
-          >
-            Réduire l'URL
-          </button>
-        </form>
+        <UrlShortenerForm />
 
         {/* Espacio para mostrar resultados */}
         <div className="mt-4">
