@@ -10,8 +10,8 @@ import Link from 'next/link';
 const links = [
   { name: "Accueil", href: "/", icon: HomeModernIcon},
   { name: "Statistiques", href: "/url-info", icon: DocumentMagnifyingGlassIcon},
-  { name: "Mes Liens", href: "#", icon: LinkIcon},
-  { name: "Tableau de Bord Liens", href: "#", icon: ComputerDesktopIcon},
+  { name: "Mes Liens", href: "/my_links", icon: LinkIcon},
+  { name: "Tableau de Bord Liens", href: "/admin", icon: ComputerDesktopIcon},
 ]
 
 export function NavLinks() {
