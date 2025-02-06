@@ -1,5 +1,6 @@
 import { prisma } from '@/app/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/auth';
 
 function generateCode() {
   const letters = 'abcdefghijklmnopqrstuvwxyz';
@@ -57,11 +58,21 @@ export async function POST(request: NextRequest) {
     }
 
     const short_code = await generateUniqueCode();
-
+    const session = await auth();
+    const user = session?.user;
+    let userId = null;
+    if (user && user.email) {
+      const userRecord = await prisma.users.findUnique({
+        where: { email: user.email },
+        select: { id: true }
+      });
+      userId = userRecord?.id || null;
+    }
     const newLink = await prisma.links.create({
       data: {
         original_url: originalUrl,
         short_code,
+        user_id: userId,
       },
     });
 
