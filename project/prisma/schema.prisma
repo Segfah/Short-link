@@ -19,7 +19,7 @@ model links {
   ip_creation          String?
   deactivate_in        DateTime? @db.Timestamp(6)
   creation_date        DateTime? @default(now()) @db.Timestamp(6)
-  updated_date         DateTime? @default(now()) @db.Timestamp(6)
+  updated_date         DateTime  @updatedAt @db.Timestamp(6)
   users                users?    @relation(fields: [user_id], references: [id], onUpdate: NoAction)
 }
 

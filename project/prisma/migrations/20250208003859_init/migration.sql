@@ -11,7 +11,7 @@ CREATE TABLE "links" (
     "ip_creation" TEXT,
     "deactivate_in" TIMESTAMP(6),
     "creation_date" TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
-    "updated_date" TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
+    "updated_date" TIMESTAMP(6) NOT NULL,
 
     CONSTRAINT "links_pkey" PRIMARY KEY ("id")
 );
