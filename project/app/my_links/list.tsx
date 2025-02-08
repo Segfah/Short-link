@@ -59,15 +59,37 @@ export function Dashboard() {
             is_disabled: link.is_disabled
           })
         });
-        console.log ('Response:', response);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        
-        const updatedLink = await response.json();
-        console.log('Link updated:', updatedLink);
+
       } catch (error) {
         console.error('Error updating link:', error);
+      }
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!isValidUrl[id]) return;
+    const link = links.find(link => link.id === id);
+    if (link) {
+      try {
+        const response = await fetch(`/api/link`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            short_code: link.short_code
+          })
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        setLinks(links.filter(link => link.id !== id));
+      } catch (error) {
+        console.error('Error deleting link:', error);
       }
     }
   };
@@ -127,6 +149,7 @@ export function Dashboard() {
                   </button>
                   <button
                     type="button"
+                    onClick={() => handleDelete(link.id)}
                     className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                   >
                     Supprimer

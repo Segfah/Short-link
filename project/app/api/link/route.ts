@@ -19,7 +19,6 @@ export async function GET() {
       where: { email },
       include: { links: true }
     });
-    console.log('Links:', links);
 
     return new Response(JSON.stringify(links), {
       status: 200,
@@ -79,7 +78,10 @@ export async function PUT(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { short_code: string } }) {
+
+export async function DELETE(req: NextRequest) {
+  const body = await req.json();
+  const { short_code } = body;
   try {
     const user = await authenticateUser();
     const email = user.email as string;
@@ -96,7 +98,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { short_cod
 
     const deletedLink = await prisma.links.delete({
       where: {
-        short_code: params.short_code,
+        short_code: short_code,
         user_id: userRecord.id
       }
     });
