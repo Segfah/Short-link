@@ -14,7 +14,7 @@ export function Dashboard() {
   const [isValidUrl, setIsValidUrl] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
-    fetch("/api/getUserLinks")
+    fetch("/api/link")
       .then(res => res.json())
       .then(data => {
         setLinks(data.links);
@@ -43,11 +43,32 @@ export function Dashboard() {
     setIsValidUrl({ ...isValidUrl, [id]: validateUrl(value) });
   };
 
-  const handleSave = (id: string) => {
+  const handleSave = async (id: string) => {
     if (!isValidUrl[id]) return;
     const link = links.find(link => link.id === id);
     if (link) {
-      console.log("Guardando datos:", { source: link.original_url, isActive: !link.is_disabled });
+      try {
+        const response = await fetch(`/api/link`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            short_code: link.short_code,
+            original_url: link.original_url,
+            is_disabled: link.is_disabled
+          })
+        });
+        console.log ('Response:', response);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        
+        const updatedLink = await response.json();
+        console.log('Link updated:', updatedLink);
+      } catch (error) {
+        console.error('Error updating link:', error);
+      }
     }
   };
 
