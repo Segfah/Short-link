@@ -2,7 +2,7 @@ import { getLinkInfo } from '@/app/ui/info-rendering';
 import Link from 'next/link';
 import { auth } from '@/auth';
 
-export default async function Page({ params }: { params: { code: string } }) {
+export default async function Page({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
   const linkInfo = await getLinkInfo(code);
   const user = await auth();
