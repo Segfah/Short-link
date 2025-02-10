@@ -1,9 +1,11 @@
 import { getLinkInfo } from '@/app/ui/info-rendering';
 import Link from 'next/link';
+import { auth } from '@/auth';
 
 export default async function Page({ params }: { params: { code: string } }) {
   const { code } = await params;
   const linkInfo = await getLinkInfo(code);
+  const user = await auth();
 
   const fields = [
     { label: 'URL originale', value: linkInfo?.original_url, isLink: true },
@@ -34,20 +36,36 @@ export default async function Page({ params }: { params: { code: string } }) {
 
         <div className="mt-4">
           {linkInfo ? (
-            <ul className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-md text-gray-700 space-y-2">
-              {fields.map((field, index) =>
-                field.value ? (
-                  <li key={index}>
-                    <span className="font-semibold">{field.label} :</span>{' '}
-                    {field.isLink ? (
-                      <a href={field.value} className="text-blue-600 underline">{field.value}</a>
-                    ) : (
-                      field.value
-                    )}
-                  </li>
-                ) : null
+            <>
+              <ul className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-md text-gray-700 space-y-2">
+                {fields.map((field, index) =>
+                  field.value ? (
+                    <li key={index}>
+                      <span className="font-semibold">{field.label} :</span>{' '}
+                      {field.isLink ? (
+                        <a href={field.value} className="text-blue-600 underline">{field.value}</a>
+                      ) : (
+                        field.value
+                      )}
+                    </li>
+                  ) : null
+                )}
+              </ul>
+
+              {/* Mostrar userfields solo si hay un usuario autenticado */}
+              {user && (
+                <ul className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-md text-gray-700 space-y-2">
+                  {userfields.map((field, index) =>
+                    field.value ? (
+                      <li key={index}>
+                        <span className="font-semibold">{field.label} :</span>{' '}
+                        {field.value}
+                      </li>
+                    ) : null
+                  )}
+                </ul>
               )}
-            </ul>
+            </>
           ) : (
             <div className="mt-4 text-center text-gray-500">
               Aucun résultat trouvé pour le code spécifié, veuillez réessayer avec un autre code.
