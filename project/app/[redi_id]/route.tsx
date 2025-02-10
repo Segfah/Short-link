@@ -6,7 +6,6 @@ export async function GET(req: NextRequest, { params }: { params: { redi_id: str
 
     // Buscar en la base de datos
     const urlEntry = await prisma.links.findUnique({ where: { short_code: redi_id } });
-
     if (!urlEntry) {
         return NextResponse.json({ error: 'URL no encontrada' }, { status: 404 });
     }
@@ -20,5 +19,9 @@ export async function GET(req: NextRequest, { params }: { params: { redi_id: str
         },
     });
 
+    if (urlEntry.is_disabled === true) {
+        const baseUrl = req.nextUrl.origin;
+        return NextResponse.redirect(`${baseUrl}/url-info/${redi_id}`);
+    }
     return NextResponse.redirect(urlEntry.original_url);
 }
