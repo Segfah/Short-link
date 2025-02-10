@@ -11,5 +11,14 @@ export async function GET(req: NextRequest, { params }: { params: { redi_id: str
         return NextResponse.json({ error: 'URL no encontrada' }, { status: 404 });
     }
 
+    // Actualizar access_count y last_access
+    await prisma.links.update({
+        where: { short_code: redi_id },
+        data: {
+            access_count: { increment: 1 },
+            last_access: new Date(),
+        },
+    });
+
     return NextResponse.redirect(urlEntry.original_url);
 }
