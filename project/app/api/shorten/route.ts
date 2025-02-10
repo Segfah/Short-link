@@ -77,8 +77,7 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ 
-      shortUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/${newLink.short_code}`,
-      link: newLink 
+      shortUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/${newLink.short_code}`
     });
   } catch (error) {
     console.error('Error en el servidor:', error);

@@ -15,12 +15,23 @@ export async function GET() {
   try {
     const user = await authenticateUser();
     const email = user.email as string;
-    const links = await prisma.users.findUnique({
+    const userData = await prisma.users.findUnique({
       where: { email },
-      include: { links: true }
+      select: {
+        links: {
+          select: {
+            id: true,
+            creation_date: true,
+            is_disabled: true,
+            original_url: true,
+            short_code: true,
+            updated_date: true,
+          }
+        }
+      }
     });
 
-    return new Response(JSON.stringify(links), {
+    return new Response(JSON.stringify({ links: userData?.links || [] }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -52,7 +63,7 @@ export async function PUT(req: NextRequest) {
       });
     }
 
-    const updatedLink = await prisma.links.update({
+    await prisma.links.update({
       where: {
         short_code: short_code,
         user_id: userRecord.id
@@ -63,7 +74,7 @@ export async function PUT(req: NextRequest) {
       }
     });
 
-    return new Response(JSON.stringify(updatedLink), {
+    return new Response(JSON.stringify('Link updated successfully'), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -96,14 +107,14 @@ export async function DELETE(req: NextRequest) {
       });
     }
 
-    const deletedLink = await prisma.links.delete({
+    await prisma.links.delete({
       where: {
         short_code: short_code,
         user_id: userRecord.id
       }
     });
 
-    return new Response(JSON.stringify(deletedLink), {
+    return new Response(JSON.stringify('Link deleted successfully'), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
