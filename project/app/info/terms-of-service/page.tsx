@@ -3,7 +3,7 @@ export default function Page() {
     <div className="bg-gray-100 min-h-screen py-8 px-4">
       <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 text-gray-800">
         <h1 className="text-2xl font-bold mb-4">Conditions Générales d'Utilisation</h1>
-        <p className="mb-4">Dernière mise à jour : 27/01/2025</p>
+        <p className="mb-4">Dernière mise à jour : 10/02/2025</p>
 
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">1. Acceptation des Conditions</h2>
@@ -26,7 +26,7 @@ export default function Page() {
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">4. Utilisation du Service</h2>
           <ul className="list-disc list-inside">
-            <li>Les liens créés sans compte utilisateur seront automatiquement supprimés après 24 heures.</li>
+            <li>Les liens créés sans compte utilisateur seront automatiquement supprimés le premier jour de chaque mois.</li>
             <li>Les liens créés avec un compte utilisateur seront supprimés, modifiés par vous-même ou si vous supprimez votre compte.</li>
             <li>Vous vous engagez à ne pas utiliser le service à des fins illégales, frauduleuses ou malveillantes.</li>
           </ul>
@@ -66,7 +66,7 @@ export default function Page() {
           <h2 className="text-xl font-semibold mb-2">9. Loi Applicable</h2>
           <p>Ces conditions seront régies et interprétées conformément aux lois françaises.</p>
         </div>
-
+        <p className="text-center mt-8 text-gray-500">Notre site utilise uniquement des cookies strictement nécessaires au fonctionnement du service, notamment pour l'authentification des utilisateurs et la gestion des sessions, ces cookies ne collectent aucune donnée personnelle à des fins publicitaires ou analytiques.</p>
       </div>
     </div>
   );

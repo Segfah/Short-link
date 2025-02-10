@@ -9,7 +9,7 @@ export default function Home() {
         
         <div className="mt-4 text-center text-gray-500 mb-8">
           <ul className="list-disc list-inside">
-            <li>Les liens créés sans compte utilisateur seront automatiquement supprimés après 24 heures.</li>
+            <li>Les liens créés sans compte utilisateur seront automatiquement supprimés le premier jour de chaque mois.</li>
             <li>Les liens créés avec un compte utilisateur seront supprimés, modifiés par vous-même ou si vous supprimez votre compte.</li>
           </ul>
         </div>
