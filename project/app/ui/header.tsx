@@ -2,8 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { NavLinks, NavLinksMobile } from "./nav-links";
 import AuthButton from "./auth-button";
+import { auth } from "@/auth";
 
-const Header = () => {
+const Header = async () => {
+  const session = await auth();
+  const user = session?.user;
   return (
     <header className="bg-gray-100">
       <div className="bg-gray-100 font-sans w-full m-0">
@@ -31,7 +34,7 @@ const Header = () => {
               </div>
 
               {/* Menú en pantallas grandes */}
-              <NavLinks />
+              <NavLinks user={user}/>
 
               {/* Botones de Sign In y Sign Up */}
               <AuthButton is_mobile={false}/>
@@ -60,7 +63,7 @@ const Header = () => {
 
             <div className="sm:hidden peer-checked:block hidden bg-white  py-2">
               <div className="flex flex-col block sm:hidden">
-                <NavLinksMobile />
+                <NavLinksMobile user={user}/>
                 <AuthButton is_mobile={true}/>
               </div>
             </div>

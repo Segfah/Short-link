@@ -8,20 +8,34 @@ import {
 } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { User } from 'next-auth';
 
-const links = [
+// Links públicos (sin autenticación)
+const publicLinks = [
   { name: "Accueil", href: "/", icon: HomeModernIcon},
   { name: "Statistiques", href: "/url-info", icon: DocumentMagnifyingGlassIcon},
-  { name: "Mes Liens", href: "/my_links", icon: LinkIcon},
-  { name: "Tableau de Bord Liens", href: "/admin", icon: ComputerDesktopIcon},
-]
+];
 
-export function NavLinks() {
+// Links adicionales para usuarios autenticados
+const authenticatedLinks = [
+  { name: "Mes Liens", href: "/my_links", icon: LinkIcon},
+];
+
+// Links para administradores
+const adminLinks = [
+  { name: "Tableau de Bord Liens", href: "/admin", icon: ComputerDesktopIcon},
+];
+
+export function NavLinks({ user }: { user: User | undefined }) {
   const pathname = usePathname();
+  const linksToShow = [
+    ...publicLinks,
+    ...(user ? authenticatedLinks : [])
+  ];
   return (
     <>
       <div className="hidden sm:flex sm:items-center">
-        {links.map((link) => {
+        {linksToShow.map((link) => {
           const LinkIcon = link.icon;
           return (
             <Link
@@ -43,11 +57,15 @@ export function NavLinks() {
   );
 }
 
-export function NavLinksMobile(){
+export function NavLinksMobile({ user }: { user: User | undefined }) {
   const pathname = usePathname();
+  const linksToShow = [
+    ...publicLinks,
+    ...(user ? authenticatedLinks : [])
+  ];
   return (
-    <>
-      {links.map((link) => {
+<>
+      {linksToShow.map((link) => {
         const LinkIcon = link.icon;
         return (
           <Link
