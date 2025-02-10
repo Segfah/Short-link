@@ -4,7 +4,7 @@ import {
   HomeModernIcon,
   DocumentMagnifyingGlassIcon,
   LinkIcon,
-  ComputerDesktopIcon
+  //ComputerDesktopIcon
 } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
