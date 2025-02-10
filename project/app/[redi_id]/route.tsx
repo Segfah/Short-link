@@ -20,7 +20,7 @@ export async function GET(req: NextRequest, { params }: { params: { redi_id: str
     });
 
     if (urlEntry.is_disabled === true) {
-        const baseUrl = req.nextUrl.origin;
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
         return NextResponse.redirect(`${baseUrl}/url-info/${redi_id}`);
     }
     return NextResponse.redirect(urlEntry.original_url);
