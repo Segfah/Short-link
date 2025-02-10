@@ -19,12 +19,13 @@ export default async function Page({ params }: { params: { code: string } }) {
     { label: 'Dernier accès', value: linkInfo?.last_access ? new Date(linkInfo.last_access).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : null },
     { label: 'Suppression après 2 ans', value: linkInfo?.delete_after_2_years !== undefined ? (linkInfo.delete_after_2_years ? 'Oui' : 'Non') : null },
   ];
-
-  const Adminfields = [
-    { label: 'Identifiant', value: linkInfo?.id },
-    { label: 'ID utilisateur', value: linkInfo?.user_id },
-    { label: 'IP de création', value: linkInfo?.ip_creation },
-  ];
+  /*
+    const Adminfields = [
+      { label: 'Identifiant', value: linkInfo?.id },
+      { label: 'ID utilisateur', value: linkInfo?.user_id },
+      { label: 'IP de création', value: linkInfo?.ip_creation },
+    ];
+  */
 
   return (
     <div className="bg-gray-100 min-h-screen py-8 px-4">

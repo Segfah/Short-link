@@ -22,9 +22,11 @@ const authenticatedLinks = [
 ];
 
 // Links para administradores
-const adminLinks = [
-  { name: "Tableau de Bord Liens", href: "/admin", icon: ComputerDesktopIcon},
-];
+/*
+  const adminLinks = [
+    { name: "Tableau de Bord Liens", href: "/admin", icon: ComputerDesktopIcon},
+  ];
+*/
 
 export function NavLinks({ user }: { user: User | undefined }) {
   const pathname = usePathname();
