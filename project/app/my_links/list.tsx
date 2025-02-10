@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 interface Link {
   id: string;
@@ -109,7 +110,8 @@ export function Dashboard() {
             {links.map(link => (
               <tr key={link.id} className="border-b hover:bg-orange-100 bg-gray-100 flex flex-col sm:table-row">
                 <td className="p-3 px-5">
-                  <p className="bg-transparent">{link.short_code}</p>
+                  <Link href={`/url-info/${link.short_code}`} className="bg-transparent">{link.short_code}</Link>
+
                 </td>
                 <td className="p-3 px-5">
                   <input
