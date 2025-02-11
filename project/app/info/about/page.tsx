@@ -24,7 +24,7 @@ export default function Page() {
             <h3 className="text-lg font-medium">Mode Anonyme:</h3>
             <ul className="list-disc list-inside">
               <li>Création rapide de liens sans inscription</li>
-              <li>Liens valables pendant 24 heures</li>
+              <li>Liens valables jusqu'au dernier jour du mois</li>
               <li>Idéal pour un usage ponctuel et sans engagement</li>
             </ul>
           </div>
