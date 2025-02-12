@@ -33,8 +33,8 @@ export default function UrlShortenerForm() {
       setShortUrl(data.shortUrl);
       setCopied(false); // Resetear estado de copiado
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al procesar la solicitud');
-      console.error('Error:', err);
+      setError(err instanceof Error ? err.message : 'Erreur lors du traitement de la demande');
+      console.error('Erreur:', err);
     } finally {
       setIsLoading(false);
     }

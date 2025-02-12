@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     // Validar que la URL existe
     if (!originalUrl) {
       return NextResponse.json(
-        { error: 'URL no proporcionada' },
+        { error: 'URL non fournie' },
         { status: 400 }
       );
     }
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     // Validar que es una URL válida
     if (!validateUrl(originalUrl)) {
       return NextResponse.json(
-        { error: 'Solo se permiten URLs HTTPS' },
+        { error: 'Seules les URLs HTTPS sont autorisées' },
         { status: 400 }
       );
     }
@@ -89,9 +89,9 @@ export async function POST(request: NextRequest) {
       shortUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/${newLink.short_code}`
     });
   } catch (error) {
-    console.error('Error en el servidor:', error);
+    console.error('Erreur serveur:', error);
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      { error: 'Erreur interne du serveur' },
       { status: 500 }
     );
   }

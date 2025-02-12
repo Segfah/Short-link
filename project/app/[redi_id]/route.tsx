@@ -7,7 +7,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ redi
     // Buscar en la base de datos
     const urlEntry = await prisma.links.findUnique({ where: { short_code: redi_id } });
     if (!urlEntry) {
-        return NextResponse.json({ error: 'URL no encontrada' }, { status: 404 });
+        return NextResponse.json({ error: 'URL non trouvée' }, { status: 404 });
     }
 
     // Actualizar access_count y last_access

@@ -6,7 +6,7 @@ async function authenticateUser() {
   const session = await auth();
   const user = session?.user;
   if (!user || !user.email) {
-    throw new Error('Unauthorized');
+    throw new Error('Non autorisé');
   }
   return user;
 }
@@ -37,7 +37,7 @@ export async function GET() {
     });
   } catch (error) {
     const err = error as Error;
-    const status = err.message === 'Unauthorized' ? 401 : 500;
+    const status = err.message === 'Non autorisé' ? 401 : 500;
     return new Response(JSON.stringify({ error: err.message }), {
       status,
       headers: { 'Content-Type': 'application/json' },
@@ -57,7 +57,7 @@ export async function PUT(req: NextRequest) {
     });
 
     if (!userRecord) {
-      return new Response(JSON.stringify({ error: 'User not found' }), {
+      return new Response(JSON.stringify({ error: 'Utilisateur non trouvé' }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -74,14 +74,14 @@ export async function PUT(req: NextRequest) {
       }
     });
 
-    return new Response(JSON.stringify('Link updated successfully'), {
+    return new Response(JSON.stringify('Lien mis à jour avec succès'), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
 
   } catch (error) {
     const err = error as Error;
-    const status = err.message === 'Unauthorized' ? 401 : 500;
+    const status = err.message === 'Non autorisé' ? 401 : 500;
     return new Response(JSON.stringify({ error: err.message }), {
       status,
       headers: { 'Content-Type': 'application/json' },
@@ -101,7 +101,7 @@ export async function DELETE(req: NextRequest) {
     });
 
     if (!userRecord) {
-      return new Response(JSON.stringify({ error: 'User not found' }), {
+      return new Response(JSON.stringify({ error: 'Utilisateur non trouvé' }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -114,13 +114,13 @@ export async function DELETE(req: NextRequest) {
       }
     });
 
-    return new Response(JSON.stringify('Link deleted successfully'), {
+    return new Response(JSON.stringify('Lien supprimé avec succès'), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
     const err = error as Error;
-    const status = err.message === 'Unauthorized' ? 401 : 500;
+    const status = err.message === 'Non autorisé' ? 401 : 500;
     return new Response(JSON.stringify({ error: err.message }), {
       status,
       headers: { 'Content-Type': 'application/json' },

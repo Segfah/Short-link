@@ -6,7 +6,7 @@ async function authenticateUser() {
   const session = await auth();
   const user = session?.user;
   if (!user || !user.email) {
-    throw new Error('Unauthorized');
+    throw new Error('Non autorisé');
   }
   const email = user.email as string;
   const userAdmin = await prisma.users.findUnique({
@@ -17,7 +17,7 @@ async function authenticateUser() {
   });
 
   if (!userAdmin?.is_admin) {
-    throw new Error('Unauthorized');
+    throw new Error('Non autorisé');
   }
   return user;
 }
@@ -43,7 +43,7 @@ export async function GET() {
     });
   } catch (error) {
     const err = error as Error;
-    const status = err.message === 'Unauthorized' ? 401 : 500;
+    const status = err.message === 'Non autorisé' ? 401 : 500;
     return new Response(JSON.stringify({ error: err.message }), {
       status,
       headers: { 'Content-Type': 'application/json' },
@@ -69,7 +69,7 @@ export async function DELETE(req: NextRequest) {
     });
   } catch (error) {
     const err = error as Error;
-    const status = err.message === 'Unauthorized' ? 401 : 500;
+    const status = err.message === 'Non autorisé' ? 401 : 500;
     return new Response(JSON.stringify({ error: err.message }), {
       status,
       headers: { 'Content-Type': 'application/json' },
