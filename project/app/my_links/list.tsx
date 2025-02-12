@@ -30,7 +30,7 @@ export function Dashboard() {
 
   const validateUrl = (url: string) => {
     try {
-      if (!url.startsWith('http://') && !url.startsWith('https://'))
+      if (!url.startsWith('https://'))
         return false;
       new URL(url);
       return true;
