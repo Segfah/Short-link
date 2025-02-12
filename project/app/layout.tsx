@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Short Link - URL Shortener",
-  description: "Create short, memorable links from long URLs. Free and easy to use URL shortener service.",
-  keywords: "url shortener, link shortener, short links, url management",
+  title: "Short Link - Raccourcisseur d'URL",
+  description: "Créez des liens courts et mémorables à partir de longues URL. Service de raccourcissement d'URL gratuit et facile à utiliser.",
+  keywords: "raccourcisseur d'URL, raccourcisseur de lien, liens courts, gestion d'URL",
   openGraph: {
-    title: "Short Link - URL Shortener",
-    description: "Create short, memorable links from long URLs",
+    title: "Short Link - Raccourcisseur d'URL",
+    description: "Créez des liens courts et mémorables à partir de longues URL",
     type: "website",
   },
   robots: {
@@ -35,7 +35,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
+      <head>
+        <meta name="google-site-verification" content="6AIRED9V_kZ6syLN_G8GYH9yDc_jwKbfWbDfhFJbYi0" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased vsc-initialized`}
       >
