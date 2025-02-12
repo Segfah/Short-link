@@ -32,6 +32,17 @@ async function generateUniqueCode() {
   return short_code;
 }
 
+const validateUrl = (url: string) => {
+  try {
+    const parsedUrl = new URL(url);
+    // Verifica que el protocolo sea específicamente HTTPS
+    return parsedUrl.protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
+
 // API POST para crear un nuevo link
 export async function POST(request: NextRequest) {
   try {
@@ -48,11 +59,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Validar que es una URL válida
-    try {
-      new URL(originalUrl);
-    } catch {
+    if (!validateUrl(originalUrl)) {
       return NextResponse.json(
-        { error: 'URL inválida' },
+        { error: 'Solo se permiten URLs HTTPS' },
         { status: 400 }
       );
     }

@@ -26,7 +26,7 @@ export default function UrlShortenerForm() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al acortar la URL');
+        throw new Error(errorData.error);
       }
 
       const data = await response.json();
