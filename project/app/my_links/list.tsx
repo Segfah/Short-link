@@ -1,17 +1,10 @@
 "use client"
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-interface Link {
-  id: string;
-  short_code: string;
-  original_url: string;
-  creation_date: string;
-  is_disabled: boolean;
-}
+import { Link as LinkInterface } from "@/interfaces/Link";
 
 export function Dashboard() {
-  const [links, setLinks] = useState<Link[]>([]);
+  const [links, setLinks] = useState<LinkInterface[]>([]);
   const [isValidUrl, setIsValidUrl] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {

@@ -1,18 +1,10 @@
 "use client"
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-interface Link {
-  id: string;
-  short_code: string;
-  original_url: string;
-  creation_date: string;
-  is_disabled: boolean;
-  user_id: number | null;
-}
+import { Link as LinkInterface } from "@/interfaces/Link";
 
 export default function Dashboard() {
-  const [links, setLinks] = useState<Link[]>([]);
+  const [links, setLinks] = useState<LinkInterface[]>([]);
 
   useEffect(() => {
     fetch("/api/admin")
