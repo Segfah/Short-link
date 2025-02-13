@@ -13,35 +13,16 @@ interface Link {
 
 export default function Dashboard() {
   const [links, setLinks] = useState<Link[]>([]);
-  const [isValidUrl, setIsValidUrl] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     fetch("/api/admin")
       .then(res => res.json())
       .then(data => {
         setLinks(data.links);
-        // Validar las URLs al cargar la página
-        const initialValidation = data.links.reduce((acc: { [key: string]: boolean }, link: Link) => {
-          acc[link.id] = validateUrl(link.original_url);
-          return acc;
-        }, {});
-        setIsValidUrl(initialValidation);
       });
   }, []);
 
-  const validateUrl = (url: string) => {
-    try {
-      if (!url.startsWith('https://'))
-        return false;
-      new URL(url);
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
   const handleDelete = async (id: string) => {
-    if (!isValidUrl[id]) return;
     const link = links.find(link => link.id === id);
     if (link) {
       try {
@@ -82,12 +63,9 @@ export default function Dashboard() {
               <tr key={link.id} className="border-b hover:bg-orange-100 bg-gray-100 flex flex-col sm:table-row">
                 <td className="p-3 px-5">
                   <Link href={`/url-info/${link.short_code}`} className="bg-transparent">{link.short_code}</Link>
-
                 </td>
                 <td className="p-3 px-5">
-                  <p className="bg-transparent border-gray-300">{link.original_url} </p>
-                    
-                  {!isValidUrl[link.id] && <p className="text-red-500 text-sm mt-1">URL invalide</p>}
+                  <p className="bg-transparent border-gray-300">{link.original_url}</p>
                 </td>
                 <td className="p-3 px-2">
                   <p className="bg-transparent">{new Date(link.creation_date).toLocaleDateString()}</p>
