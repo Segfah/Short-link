@@ -1,4 +1,17 @@
 services:
+  app:
+    build:
+      context: ./project
+      dockerfile: Dockerfile
+    container_name: short_links_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://test-user:Test123%40@db:5432/short_links?schema=public
+    depends_on:
+      - db
   db:
     image: postgres:16.6
     container_name: postgres_dev
