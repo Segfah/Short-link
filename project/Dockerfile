@@ -12,8 +12,16 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
+# RUN npx prisma generate
+
+# Construye la aplicación
+RUN npm run build
+
 # Expone el puerto 8080 para el contenedor
 EXPOSE 8080
 
 # Comando para iniciar la aplicación en modo desarrollo
-CMD ["npm", "run", "dev"]
+#CMD ["npm", "run", "dev"]
+
+# Comando para iniciar la aplicación en modo producción
+CMD ["npm", "run", "start"]
