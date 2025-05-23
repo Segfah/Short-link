@@ -13,7 +13,7 @@ export function Dashboard() {
       .then(data => {
         setLinks(data.links);
         // Validar las URLs al cargar la página
-        const initialValidation = data.links.reduce((acc: { [key: string]: boolean }, link: Link) => {
+        const initialValidation = data.links.reduce((acc: { [key: string]: boolean }, link: LinkInterface) => {
           acc[link.id] = validateUrl(link.original_url);
           return acc;
         }, {});

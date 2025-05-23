@@ -1,6 +1,6 @@
 import { auth, signIn, signOut } from "@/auth"
 import { prisma } from '@/app/lib/prisma';
-import { User } from '@/interfaces/user';	
+import { User } from '@/interfaces/User';
 
 async function handleUserAuthentication(user: User | undefined) {
   if (user?.email) {
